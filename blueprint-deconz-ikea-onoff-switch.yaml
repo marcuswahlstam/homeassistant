@@ -33,7 +33,7 @@ trigger:
 
 action:
 - variables:
-	event: "{{ trigger.event.data.event }}"
+    event: "{{ trigger.event.data.event }}"
 
 - choose:
   - conditions:
