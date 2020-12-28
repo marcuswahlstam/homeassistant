@@ -37,7 +37,7 @@ action:
 
 - choose:
   - conditions:
-	- "{{ event == 1002 }}"
+    - "{{ event == 1002 }}"
     sequence:
     - service: light.turn_on
       target: !input 'light'
