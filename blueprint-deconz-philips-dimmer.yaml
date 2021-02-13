@@ -50,7 +50,7 @@ action:
   event: "{{ trigger.event.data.event }}"
 - choose:
   - conditions:
-	- "{{ event == 1000 }}"
+    - "{{ event == 1000 }}"
     sequence:
     - service: light.turn_on
       target: !input light
