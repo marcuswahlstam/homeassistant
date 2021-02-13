@@ -51,11 +51,11 @@ action:
 - choose:
 	- conditions:
 	  - "{{ event == 1000 }}"
-		sequence:
-		  service: light.turn_on
-		  target: !input light
-		  data:
-			transition: 1
+      sequence:
+		service: light.turn_on
+		target: !input light
+		data:
+		  transition: 1
 	- conditions:
 	  - "{{ event == 4000 }}"
 		sequence:
