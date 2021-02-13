@@ -1,0 +1,107 @@
+blueprint:
+  name: DeCONZ Hue Dimmer Switch <mwahlstam>
+  description: Remap short press of the dimming keys to brightness presets, hold to dim.
+  domain: automation
+  input:
+    dimmer_switch:
+      name: Dimmer Switch
+      description: The Dimmer Switch
+      selector:
+        device:
+          integration: deconz
+          manufacturer: Philips
+          model: RWL021
+    light:
+      name: Light
+      description: The Light to control
+      selector:
+        target:
+          entity:
+            domain: light
+    bright_high:
+      name: High Brightness
+      description: Brightness Level for the high setting
+      default: 90
+      selector:
+        number:
+          min: 1
+          max: 100
+          unit_of_measurement: "%"
+    bright_low:
+      name: Low Brightness
+      description: Brightness Level for the low setting
+      default: 10
+      selector:
+        number:
+          min: 1
+          max: 100
+          unit_of_measurement: "%"
+mode: restart
+max_exceeded: silent
+
+trigger:
+  - platform: event
+    event_type: deconz_event
+    event_data:
+      device_id: !input "dimmer_switch"
+
+action:
+- variables:
+    event: "{{ trigger.event.data.event }}"
+- choose:
+  - conditions:
+    - "{{ event == 1000 }}"
+    sequence:
+    - service: light.turn_on
+      target: !input light
+      data:
+        transition: 1
+  - conditions:
+    - "{{ event == 4000 }}"
+    sequence:
+    - service: light.turn_off
+      target: !input light
+      data:
+        transition: 1
+  - conditions:
+    - "{{ event == 1001 }}"
+    sequence:
+    - service: light.turn_on
+      target: !input light
+      data:
+        brightness_pct: !input bright_high
+  - conditions:
+    - "{{ event == 4001 }}"
+    sequence:
+    - service: light.turn_on
+      target: !input light
+      data:
+        brightness_pct: !input bright_low
+  - conditions:
+    - "{{ event == 2001 }}"
+    sequence:
+      repeat:
+        while:
+        - condition: template
+          value_template: "{{ repeat.index < 10 }}"
+        sequence:
+        - service: light.turn_on
+          target: !input 'light'
+          data:
+            transition: 1
+            brightness_step_pct: 10
+        - delay: 1
+  - conditions:
+    - "{{ event == 3001 }}"
+    sequence:
+      repeat:
+        while:
+        - condition: template
+          value_template: "{{ repeat.index < 10 }}"
+        sequence:
+        - service: light.turn_on
+          target: !input 'light'
+          data:
+            transition: 1
+            brightness_step_pct: -10
+        - delay: 1
