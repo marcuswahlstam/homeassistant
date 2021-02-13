@@ -90,7 +90,7 @@ action:
           data:
             transition: 1
             brightness_step_pct: 10
-		  - delay: 1
+        - delay: 1
   - conditions:
     - "{{ event == 3001 }}"
     sequence:
