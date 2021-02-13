@@ -1,5 +1,5 @@
 blueprint:
-  name: DeCONZ Hue Dimmer Switch <mwahlstam>
+  name: DeCONZ Hue Dimmer Switch v3 <mwahlstam>
   description: Remap short press of the dimming keys to brightness presets, hold to dim.
   domain: automation
   input:
