@@ -46,62 +46,62 @@ trigger:
       device_id: !input "dimmer_switch"
 
 action:
-  - variables:
-    event: "{{ trigger.event.data.event }}"
-  - choose:
-    - conditions:
-      - "{{ event == 1000 }}"
-        sequence:
-          service: light.turn_on
-          target: !input light
-          data:
-            transition: 1
-    - conditions:
-      - "{{ event == 4000 }}"
-        sequence:
-          service: light.turn_off
-          target: !input light
-          data:
-            transition: 1
-    - conditions:
-      - "{{ event == 2000 }}"
-        sequence:
-          service: light.turn_on
-          target: !input light
-          data:
-            brightness_pct: !input bright_high
-    - conditions:
-      - "{{ event == 3000 }}"
-        sequence:
-          service: light.turn_on
-          target: !input light
-          data:
-            brightness_pct: !input bright_low
-    - conditions:
-      - "{{ event == 2001 }}"
-      sequence:
-        repeat:
-          while:
-          - condition: template
-            value_template: "{{ repeat.index < 10 }}"
-          sequence:
-          - service: light.turn_on
-            target: !input 'light'
-            data:
-              transition: 1
-              brightness_step_pct: 10
-          - delay: 1
-    - conditions:
-      - "{{ event == 3001 }}"
-      sequence:
-        repeat:
-          while:
-          - condition: template
-            value_template: "{{ repeat.index < 10 }}"
-          sequence:
-          - service: light.turn_on
-            target: !input 'light'
-            data:
-              transition: 1
-              brightness_step_pct: -10
-          - delay: 1
+- variables:
+  event: "{{ trigger.event.data.event }}"
+- choose:
+	- conditions:
+	  - "{{ event == 1000 }}"
+		sequence:
+		  service: light.turn_on
+		  target: !input light
+		  data:
+			transition: 1
+	- conditions:
+	  - "{{ event == 4000 }}"
+		sequence:
+		  service: light.turn_off
+		  target: !input light
+		  data:
+			transition: 1
+	- conditions:
+	  - "{{ event == 2000 }}"
+		sequence:
+		  service: light.turn_on
+		  target: !input light
+		  data:
+			brightness_pct: !input bright_high
+	- conditions:
+	  - "{{ event == 3000 }}"
+		sequence:
+		  service: light.turn_on
+		  target: !input light
+		  data:
+			brightness_pct: !input bright_low
+	- conditions:
+	  - "{{ event == 2001 }}"
+	  sequence:
+		repeat:
+		  while:
+		  - condition: template
+			value_template: "{{ repeat.index < 10 }}"
+		  sequence:
+		  - service: light.turn_on
+			target: !input 'light'
+			data:
+			  transition: 1
+			  brightness_step_pct: 10
+		  - delay: 1
+	- conditions:
+	  - "{{ event == 3001 }}"
+	  sequence:
+		repeat:
+		  while:
+		  - condition: template
+			value_template: "{{ repeat.index < 10 }}"
+		  sequence:
+		  - service: light.turn_on
+			target: !input 'light'
+			data:
+			  transition: 1
+			  brightness_step_pct: -10
+		  - delay: 1
