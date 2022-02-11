@@ -1,5 +1,5 @@
 blueprint:
-  name: deCONZ - IKEA Tradfri on/off switch
+  name: deCONZ - IKEA Tradfri on/off switch with hold to dim
   description: |
     "Control your deCONZ light(s) with IKEA Tradfri on/off switch
     
@@ -56,7 +56,7 @@ action:
       repeat:
         while:
         - condition: template
-          value_template: "{{ repeat.index < 10 }}"
+          value_template: "{{ repeat.index < 5 }}"
         sequence:
         - service: light.turn_on
           target: !input 'light'
@@ -70,7 +70,7 @@ action:
       repeat:
         while:
         - condition: template
-          value_template: "{{ repeat.index < 10 }}"
+          value_template: "{{ repeat.index < 5 }}"
         sequence:
         - service: light.turn_on
           target: !input 'light'
