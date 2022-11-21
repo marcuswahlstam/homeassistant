@@ -45,7 +45,7 @@ variables:
       {% if not state.entity_id in exclude.entity_id %}
         {% if state.state == "unavailable" %}
           {% set result.devices = result.devices + state.name %}
-	{% endif %}
+        {% endif %}
       {% endif %}
     {% endfor %}
     {{result.devices|join(', ')}}
