@@ -43,9 +43,9 @@ variables:
     {% set result = namespace(devices=[]) %}
     {% for state in hass.states.all() %}
       {% if not state.entity_id in exclude.entity_id %}
-	    {% if state.state == "unavailable" %}
+        {% if state.state == "unavailable" %}
           {% set result.devices = result.devices + state.name %}
-		{% endif %}
+	{% endif %}
       {% endif %}
     {% endfor %}
     {{result.devices|join(', ')}}
