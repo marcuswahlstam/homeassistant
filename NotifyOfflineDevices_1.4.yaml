@@ -38,7 +38,8 @@ blueprint:
 variables:
   day: !input 'day'
   exclude: !input 'exclude'
-  devices: '{{ states|selectattr('state', 'eq', 'unavailable')|map(attribute='entity_id')|list|join('\n') }}'
+  devices: >- 
+    '{{ states|selectattr('state', 'eq', 'unavailable') | map(attribute='entity_id') }}'
 trigger:
 - platform: time
   at: !input 'time'
