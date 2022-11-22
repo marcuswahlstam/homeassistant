@@ -25,9 +25,7 @@ blueprint:
       description: Entities to exclude from detection. Only entities are supported, devices must be expanded!
       default: {entity_id: []}
       selector:
-        target:
-          entity:
-            device_class:
+        entity:
     actions:
       name: Actions
       description: Notifications or similar to be run. {{devices}} is replaced with
