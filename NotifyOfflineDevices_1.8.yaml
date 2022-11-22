@@ -33,7 +33,7 @@ blueprint:
         the names of sensors being low on battery.
       selector:
         action: {}
-  source_url: https://github.com/marcuswahlstam/homeassistant/blob/main/NotifyOfflineDevices_1.7.yaml
+  source_url: https://github.com/marcuswahlstam/homeassistant/blob/main/NotifyOfflineDevices_1.8.yaml
 variables:
   day: !input 'day'
   exclude: !input 'exclude'
