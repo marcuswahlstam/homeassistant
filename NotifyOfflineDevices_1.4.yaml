@@ -39,7 +39,7 @@ variables:
   day: !input 'day'
   exclude: !input 'exclude'
   devices: >- 
-    '{{ states|selectattr('state', 'eq', 'unavailable') | map(attribute='entity_id') }}'
+    {{ states|selectattr('state', 'eq', 'unavailable') | map(attribute='entity_id') | list }}
 trigger:
 - platform: time
   at: !input 'time'
